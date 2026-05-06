@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>StickerVibe</title>
+</head>
+<body>
+
+<div id="sizeOptions"></div>
+<div id="mockups"></div>
+<div id="productModal"></div>
+
+<script>
+let cart = [];
+
+// Product modal open logic (fixed)
+function openProductModal(productId) {
+
+    const product = {
+        id: productId,
+        name: "Demo Sticker",
+        price: 99,
+        image: "https://via.placeholder.com/300",
+        mockups: ["laptop", "phone"]
+    };
+
+    const sizes = ['2"', '3"', '4"'];
+
+    document.getElementById('sizeOptions').innerHTML = sizes.map(size =>
+        `<button class="size-btn ${size === '3"' ? 'active' : ''}" data-size="${size}">${size}</button>`
+    ).join('');
+
+    const mockupsDiv = document.getElementById('mockups');
+    mockupsDiv.innerHTML = product.mockups.map((mockup, index) =>
+        `<img src="${product.image}" class="mockup-thumb ${index === 0 ? 'active' : ''}" alt="${mockup}">`
+    ).join('');
+
+    document.getElementById('productModal').style.display = 'flex';
+}
+
+function closeProductModal() {
+    document.getElementById('productModal').style.display = 'none';
+}
+
+function checkout() {
+    if (cart.length === 0) {
+        alert("Cart empty!");
+        return;
+    }
+    alert("Checkout demo");
+}
+
+window.onclick = function(event) {
+    const modal = document.getElementById('productModal');
+    if (event.target === modal) {
+        closeProductModal();
+    }
+}
+</script>
+
+</body>
+</html>
